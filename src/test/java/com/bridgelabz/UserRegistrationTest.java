@@ -13,6 +13,7 @@ public class UserRegistrationTest {
         Assert.assertEquals(true, result);
     }
 
+
     @Test
     public void givenFirstname_WhenNotProper_ShouldReturn_False() {
         UserRegestration uservalid = new UserRegestration();

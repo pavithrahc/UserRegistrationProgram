@@ -9,4 +9,5 @@ public class UserRegestration {
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         return pattern.matcher(firstName).matches();
     }
+
 }
