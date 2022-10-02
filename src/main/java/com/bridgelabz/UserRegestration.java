@@ -6,6 +6,7 @@ public class UserRegestration {
     private static final String NAME_PATTERN = "^[A-Z]{1}[a-z]{2,}$";
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.+_-]+[@][a-zA-Z0-9]+[.]co(m|.in)$";
     private static final String PHONE_PATTERN = "^[0-9]{2}[0-9]{10}";
+    private static final String PASSWORD_PATTERN = "[a-zA-Z0-9](?=.*[A-Z]).{8,40}";
 
     public boolean validatFirstName(String firstName){
         Pattern pattern = Pattern.compile(NAME_PATTERN);
@@ -22,5 +23,9 @@ public class UserRegestration {
     public boolean validatePhone(String phone) {
         Pattern pattern = Pattern.compile(PHONE_PATTERN);
         return pattern.matcher(phone).matches();
+    }
+    public boolean validatePassword(String password) {
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        return pattern.matcher(password).matches();
     }
 }
