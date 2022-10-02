@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 public class UserRegestration {
     private static final String NAME_PATTERN = "^[A-Z]{1}[a-z]{2,}$";
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.+_-]+[@][a-zA-Z0-9]+[.]co(m|.in)$";
+    private static final String EMAIL_PATTERN1 = "^[a-zA-Z0-9+]+[@][a-zA-Z0-9]+[.]co(m|.in)$";
     private static final String PHONE_PATTERN = "^[0-9]{2}[0-9]{10}";
     private static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[A-Z]).{8,40}";
 
@@ -18,6 +19,10 @@ public class UserRegestration {
     }
     public boolean validateEmail(String email) {
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        return pattern.matcher(email).matches();
+    }
+    public boolean validateEmail1(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN1);
         return pattern.matcher(email).matches();
     }
     public boolean validatePhone(String phone) {
