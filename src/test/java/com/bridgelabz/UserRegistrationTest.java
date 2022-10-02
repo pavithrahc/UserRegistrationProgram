@@ -69,4 +69,5 @@ public class UserRegistrationTest {
         boolean result = userValidater.validatePassword("123asdfgh");
         Assert.assertEquals(false,result);
     }
+
 }
