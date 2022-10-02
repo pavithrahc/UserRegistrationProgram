@@ -29,3 +29,4 @@ public class UserRegestration {
         return pattern.matcher(password).matches();
     }
 }
+
