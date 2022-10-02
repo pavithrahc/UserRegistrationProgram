@@ -60,7 +60,7 @@ public class UserRegistrationTest {
     @Test
     public void givenPassword_WhenProper_ShouldReturn_True() {
         UserRegestration userValidater = new UserRegestration();
-        boolean result = userValidater.validatePassword("abcdfdAfg0");
+        boolean result = userValidater.validatePassword("abcdfdA@#fg0");
         Assert.assertEquals(true,result);
     }
     @Test
