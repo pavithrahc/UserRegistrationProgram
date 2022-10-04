@@ -1,126 +1,49 @@
 package com.bridgelabz;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class UserRegestration {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    static final Pattern names = Pattern.compile("^[A-Z]{1}[a-z]{2,}$");
+    static final Pattern email = Pattern
+            .compile("^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$");
+    static final Pattern phone = Pattern.compile("^[0-9]{2}[ ]?[0-9]{10}$");
+    static final Pattern password = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).{8,}$");
 
-        System.out.print("Enter First Name : ");
-        String firstName = scanner.next();
-        System.out.println(validateName(firstName));
-
-        System.out.print("Enter Last Name : ");
-        String lastName = scanner.next();
-        System.out.println(validateName(lastName));
-
-        System.out.print("Enter Email : ");
-        String email = scanner.next();
-        System.out.println(validateEmail(email));
-
-        System.out.print("Enter Mobile Number : ");
-        String mNumber = scanner.next();
-        System.out.println(validatingMobile(mNumber));
-
-        System.out.print("Enter Password : ");
-        String password = scanner.next();
-        System.out.println(validatePassword(password));
+    public static boolean check(String inputs) throws CustomException {
+        Matcher matcher = names.matcher(inputs);
+        if (matcher.matches())
+            return names.matcher(inputs).matches();
+        else
+            throw new CustomException(inputs + " Invalid input ");
     }
 
-    /**
-     * Method for validating the user first and last  name using regex.
-     *
-     * @param name : user input as first or last name
-     * @return : true or false
-     */
-    public static boolean validateName(String name) {
-        Pattern pattern = Pattern.compile("^[A-Z]{1}+[a-z]{2,}$");
-        if (name == null) {
-            return false;
-        }
-        Matcher matcher = pattern.matcher(name);
+    public static boolean mail(String mail) throws CustomException {
+        Matcher matcher = email.matcher(mail);
         if (matcher.matches())
-            return true;
+            return email.matcher(mail).matches();
         else
-            try {
-                throw new ValidationException("Invalid Name");
-            } catch (ValidationException e) {
-                e.printStackTrace();
-            }
-        return matcher.matches();
+            throw new CustomException(mail + " Invalid input ");
     }
 
-
-    /**
-     * Method for validating the user's email using regex
-     *
-     * @param email : user's email
-     * @return : true or false
-     */
-    public static boolean validateEmail(String email) {
-        Pattern pattern = Pattern.compile("^[a-zA-z0-9.+-]+[@]+[a-zA-z0-9]+[.]+[a-zA-z0-9.]{2,}$");
-        if (email == null) {
-            return false;
-        }
-        Matcher matcher = pattern.matcher(email);
+    public static boolean mobile(String mobile) throws CustomException {
+        Matcher matcher = phone.matcher(mobile);
         if (matcher.matches())
-            return true;
+            return phone.matcher(mobile).matches();
         else
-            try {
-                throw new ValidationException("Invalid Email");
-            } catch (ValidationException e) {
-                e.printStackTrace();
-            }
-        return matcher.matches();
+            throw new CustomException(mobile + " Invalid input ");
     }
 
-    /**
-     * Method for validating the user's mobile number using regex
-     *
-     * @param mNumber : User's mobile number
-     * @return : true or false
-     */
-    public static boolean validatingMobile(String mNumber) {
-        Pattern pattern = Pattern.compile("^[9][1]+\\s\\d{10}$");
-        if (mNumber == null) {
-            return false;
-        }
-        Matcher matcher = pattern.matcher(mNumber);
+    public static boolean passwords(String pass) throws CustomException {
+        Matcher matcher = password.matcher(pass);
         if (matcher.matches())
-            return true;
+            return password.matcher(pass).matches();
         else
-            try {
-                throw new ValidationException("Invalid Mobile Number");
-            } catch (ValidationException e) {
-                e.printStackTrace();
-            }
-        return matcher.matches();
+            throw new CustomException(pass + " Invalid input ");
     }
+}
 
-    /**
-     * Method for validating the user's password using regex.
-     * Rule1 – minimum 8 characters
-     * Rule2 – Should have at least 1 Upper Case - NOTE – All rules must be passed
-     * Rule3 – Should have at least 1 numeric number in the password
-     * Rule4 – Has exactly 1 Special Character
-     *
-     * @param password : user password
-     * @return : true or false.
-     */
-    public static boolean validatePassword(String password) {
-        Pattern pattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-        if (password == null) {
-            return false;
-        }
-        Matcher matcher = pattern.matcher(password);
-        if (matcher.matches())
-            return true;
-        else
-            try {
-                throw new ValidationException("Invalid Password");
-            } catch (ValidationException e) {
-                e.printStackTrace();
-            }
-        return matcher.matches();
+class CustomException extends Exception {
+
+    public CustomException(String message) {
+        super(message);
     }
 }
